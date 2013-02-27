@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}
+      %title FancyApp
+      = stylesheet_link_tag 'application'
+      = javascript_include_tag "application"
+      = csrf_meta_tags
+      = tag :meta, :name => "pusher-key", :content => PUSHER_KEY
+      = tag :meta, :name => "pusher-channel", :content => PUSHER_CHANNEL
+
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.brand{:href => '/'}
+            FancyApp
+          %ul.nav
+            %li
+              %a{"data-route" => "routes.posts"} Posts
+    #main.container
+      .content
+        %p#flashnotice.alert.alert-success{:data => {"showif" => "window.FancyApp.flash.success.length"}}
+          %a.close{:href => "#", :onclick => "$('#flashnotice').hide(); return false"} ×
+          %span{:data => {"bind" => "window.FancyApp.flash.success"}}
+        %p#flashwarning.alert.alert-error{:data => {"showif" => "window.FancyApp.flash.error.length"}}
+          %a.close{:href => "#", :onclick => "$('#flashwarning').hide(); return false"} ×
+          %span{:data => {"bind" => "window.FancyApp.flash.error"}}
+        %div{:data => {"yield" => "main"}}
+        %footer
+          %p
+            &copy; zhubert #{Time.now.year}

@@ -1,0 +1,9 @@
+.well
+  %a.btn.btn-primary{"data-route" => 'routes.posts.new'} New Post
+
+.row
+  #content.span12
+    #posts
+      %div{"data-foreach-post" => "posts"}
+        .post{"data-partial" => "posts/_post"}
+
