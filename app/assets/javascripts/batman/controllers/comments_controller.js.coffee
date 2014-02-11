@@ -41,10 +41,13 @@ class FancyApp.CommentsController extends Batman.Controller
 
   # not routable, an event
   destroy: ->
-    @get('comment').destroy (err) =>
+    comment = @get('comment')
+    post_id = comment.get('post_id')
+
+    comment.destroy (err) =>
       if err
         throw err unless err instanceof Batman.ErrorsSet
       else
         FancyApp.flashSuccess "Removed successfully!"
-        @redirect "/posts/#{p.get('post_id')}"
+        @redirect "/posts/#{post_id}"
 
